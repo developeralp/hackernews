@@ -1,7 +1,5 @@
 # HackerNews
 
-<h3 align="center">HackerNews</h3>
-
 HackerNews is an open-source HN app.
 
 ## About

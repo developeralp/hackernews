@@ -34,7 +34,7 @@ migrate_working_dir/
 /build/
 .metadata
 
-pubspec.yaml
+pubspec.lock
 
 # Symbolication related
 app.*.symbols
