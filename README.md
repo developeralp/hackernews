@@ -29,4 +29,7 @@ The app has two main pages:
 ## Common Challenges with the HN API
 1. **Slow loading when fetching posts**:
     - Used Flutter’s `Future` for asynchronous calls. While this improved performance, it wasn’t perfect.
-    - Implemented **endless scrolling** to load more posts as the user reaches the bottom of the page.  
+    - Implemented **endless scrolling** to load more posts as the user reaches the bottom of the page.
+
+## See in action
+![hacker_news_gif1](https://github.com/user-attachments/assets/3151691a-99ae-4221-81b0-77f83f4aff38)
