@@ -1,0 +1,2 @@
+/Users/alp/Code/etc/HackerNewsApp/HackerNews/android/app/.cxx/RelWithDebInfo/3k3j451t/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/alp/Code/etc/HackerNewsApp/HackerNews/android/app/.cxx/RelWithDebInfo/3k3j451t/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/alp/Library/Flutter/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/alp/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/alp/Code/etc/HackerNewsApp/HackerNews/android/app/.cxx/RelWithDebInfo/3k3j451t/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/alp/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/alp/Code/etc/HackerNewsApp/HackerNews/android/app/.cxx/RelWithDebInfo/3k3j451t/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

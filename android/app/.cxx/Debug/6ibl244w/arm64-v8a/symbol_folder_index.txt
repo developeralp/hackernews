@@ -1,0 +1,1 @@
+/Users/alp/Code/etc/HackerNewsApp/HackerNews/build/app/intermediates/cxx/Debug/6ibl244w/obj/arm64-v8a
