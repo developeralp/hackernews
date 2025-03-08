@@ -22,7 +22,7 @@ The app has two main pages:
 1. **Home Page**: Displays the top stories.
 2. **User Page**: Shows a user’s posts.
 
-### Navigation
+## Navigation
 - Clicking on the **user** part of a post redirects to the **User Page**.
 - Tapping on a **post** opens the URL of the post.
 
@@ -33,3 +33,10 @@ The app has two main pages:
 
 ## See in action
 ![hacker_news_gif1](https://github.com/user-attachments/assets/3151691a-99ae-4221-81b0-77f83f4aff38)
+
+## Building the project
+```bash
+mkdir hackernews
+cd hackernews
+git init && git pull https://github.com/developeralp/hackernews
+flutter pub get
