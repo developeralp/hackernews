@@ -47,6 +47,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /android/.gradle
+/android/.cxx/
+/android/.cxx
 
 /.idea/
 /.vscode/

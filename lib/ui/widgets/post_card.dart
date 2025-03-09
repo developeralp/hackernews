@@ -127,6 +127,7 @@ class UserPart extends ConsumerWidget {
           );
 
           Singleton.instance.currentUser = null;
+          Singleton.instance.postIds = [];
         },
         child: Row(
           children: [

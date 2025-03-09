@@ -5,6 +5,7 @@ class Singleton {
   static Singleton get instance => _instance;
 
   User? currentUser;
+  List<int> postIds = [];
 
   Singleton._internal();
 }

@@ -50,8 +50,6 @@ class _UserPageState extends ConsumerState<UserPage> {
       } else {
         ref.read(isOnlineProvider.notifier).state = OnlineTypes.online;
       }
-
-      // Received changes in available connectivity types!
     });
   }
 

@@ -1,4 +1,5 @@
 import 'package:hackernews/models/post.dart';
+import 'package:hackernews/utils/constants.dart';
 import 'package:hackernews/utils/timer_utils.dart';
 
 class User {
@@ -26,7 +27,7 @@ class User {
         submitted: (json['submitted'] as List<dynamic>?)?.cast<int>());
   }
 
-  int maxPage({int itemCountPerPage = 10}) {
+  int maxPage({int itemCountPerPage = Constants.maxPostPerPage}) {
     if (submitted == null) return 0;
 
     return (submitted!.length / itemCountPerPage).ceil();

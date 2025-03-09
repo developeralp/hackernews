@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:hackernews/models/post.dart';
 import 'package:hackernews/models/user.dart';
+import 'package:hackernews/utils/constants.dart';
 import 'package:hackernews/utils/singleton.dart';
 
 class HackerNewsAPI {
@@ -56,6 +57,7 @@ class HackerNewsAPI {
       if (response.statusCode == 200) {
         User user = User.fromJson(response.data);
         Singleton.instance.currentUser = user;
+        Singleton.instance.postIds = [];
         return user;
       }
     } catch (e) {
@@ -74,49 +76,57 @@ class HackerNewsAPI {
     return await getUserPosts(Singleton.instance.currentUser!, page);
   }
 
-  final int postsPerPage = 30;
+  final int postsPerPage = Constants.maxPostPerPage;
 
   Future<List<Post>> getUserPosts(User user, int page) async {
     log('getUserPosts(${user.id}), page: $page, total submitted length: ${user.submitted?.length ?? 0}');
 
-    if (user.submitted != null) {
-      List<int> postsAll = user.submitted!;
+    if (user.submitted == null) {
+      return [];
+    }
 
-      int start = (page - 1) * postsPerPage;
-      int end = start + postsPerPage;
+    List<int> postsAll = user.submitted!;
 
-      log('endless scroll log=> start: $start, end: $end');
+    int start = (page - 1) * postsPerPage;
+    int end = start + postsPerPage;
 
-      if (start >= postsAll.length) {
-        log('start >= postsAll.length, came to end');
-        return [];
-      }
+    log('endless scroll log=> start: $start, end: $end');
 
-      end = end > postsAll.length ? postsAll.length : end;
+    if (start >= postsAll.length) {
+      log('start >= postsAll.length, came to end');
+      return [];
+    }
 
-      List<int> postIds = postsAll.sublist(start, end);
+    end = end > postsAll.length ? postsAll.length : end;
 
-      List<Future<Post?>> futures =
-          postIds.map((postId) => _getPost(id: postId, page: page)).toList();
+    List<int> postIds = postsAll.sublist(start, end);
 
-      List<Post?> posts = await Future.wait(futures, eagerError: true);
+    List<Future<Post?>> futures =
+        postIds.map((postId) => _getPost(id: postId, page: page)).toList();
 
-      int successCount = posts.whereType<Post>().length;
-      int failureCount = posts.length - successCount;
-      log('Successful posts: $successCount, Failed posts: $failureCount');
+    List<Post?> posts = await Future.wait(futures, eagerError: true);
 
-      if (failureCount == posts.length) {
-        log('Page empty... status: A16');
-        // return getUserPosts(user, page + 1);
-      }
+    int successCount = posts.whereType<Post>().length;
+    int failureCount = posts.length - successCount;
+    log('Successful posts: $successCount, Failed posts: $failureCount');
+
+    if (failureCount == posts.length) {
+      log('Whole page is empty... we will get next page');
+      return getUserPosts(user, page + 1);
+    } else {
+      Singleton.instance.postIds
+          .addAll(posts.whereType<Post>().map((post) => post.id ?? 0));
 
       return posts.whereType<Post>().toList();
     }
-
-    return [];
   }
 
   Future<Post?> _getPost({required int id, int page = 0}) async {
+    if (Singleton.instance.postIds.contains(id)) {
+      log('Post $id is already processed, skipping.');
+      return null;
+    }
+
     try {
       final response = await dio.get('${apiBase}item/$id.json?print=pretty');
 
